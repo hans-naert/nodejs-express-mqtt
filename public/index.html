@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8" />
-	<title>title</title>
+    <meta charset="UTF-8" />
+    <title>title</title>
 </head>
+
 <body>
-	<h1>Hello World</h1>
+    <h1>test Ws mqtt.js</h1>
+    <script src="./browserMqtt.js"></script>
+    <script>
+        const client = mqtt.connect("ws://localhost:9001") // you add a ws:// url here
+        client.subscribe("mqtt/demo")
+
+        client.on("message", function (topic, payload) {
+            alert([topic, payload].join(": "))
+            client.end()
+        })
+
+        client.publish("mqtt/demo", "hello world!")
+    </script>
 </body>
+
 </html>
